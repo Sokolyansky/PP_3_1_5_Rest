@@ -63,7 +63,7 @@ public class AdminController {
     public String updateUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (result.hasErrors()) {
             System.out.println("Попытка удалить поле у пользователя " + result.getAllErrors().toString());
-            return "redirect:/error";
+            return "redirect:/admin/";
         }
         userService.update(user);
         return "redirect:/admin/";

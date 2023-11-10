@@ -9,22 +9,22 @@
     <form th:method= "POST" th:action= "@{/admin/save_edit_user(id=${user.getId()})}" th:object="${user}">
 
         <label for="firstName">Name: </label>
-        <input type="text"  th:field="*{firstName}" id="firstName"/>
+        <input type="text"  th:field="*{firstName}" id="firstName" required/>
         <br/>
         <br>
 
         <label for="lastName">Last name: </label>
-        <input type="text" th:field="*{lastName}" id="lastName"/>
+        <input type="text" th:field="*{lastName}" id="lastName" required/>
         <br/>
         <br>
 
         <label for="age">Age: </label>
-        <input type="text" th:field="*{age}" id="age"/>
+        <input type="text" th:field="*{age}" id="age" required/>
         <br/>
         <br>
 
         <label for="password">Password: </label>
-        <input type="text" th:field="*{password}" id="password"/>
+        <input type="text" th:field="*{password}" id="password" required/>
         <br/>
         <br>
 
