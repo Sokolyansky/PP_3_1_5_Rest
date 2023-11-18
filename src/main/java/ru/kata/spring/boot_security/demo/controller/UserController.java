@@ -16,7 +16,7 @@ public class UserController {
         this.userService = userServiceImp;
     }
 
-    @GetMapping("/user")
+    @GetMapping("user")
     public String showUser(Principal principal, ModelMap model) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
