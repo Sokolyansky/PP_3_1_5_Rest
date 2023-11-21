@@ -1,6 +1,18 @@
 package ru.kata.spring.boot_security.demo.entity;
 
-import javax.persistence.*;
+import ru.kata.spring.boot_security.demo.configs.validation.Unique;
+
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
@@ -18,6 +30,7 @@ public class User {
     @Column(name = "first_name")
     @NotNull
     @NotBlank
+    @Unique
     private String firstName;
 
     @Column(name = "last_name")
@@ -26,6 +39,7 @@ public class User {
     private String lastName;
 
     @Column(name = "age")
+    @Min(value = 0, message = "Возраст не может быть отрицательным")
     private Long age;
 
     @Column(name = "password")
@@ -94,7 +108,9 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(password, user.password) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(age, user.age);
+        return Objects.equals(id, user.id) && Objects.equals(password, user.password) &&
+                Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) &&
+                Objects.equals(age, user.age);
     }
 
     @Override

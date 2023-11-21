@@ -92,7 +92,7 @@
 
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                        th:data-bs-target="'#deleteModal'+${person.getId()}">Delete
+                                                        th:attr="data-bs-target='#deleteModal'+${person.getId()}">Delete
                                                 </button>
                                             </td>
 
@@ -110,16 +110,23 @@
                                                         <div class="modal-body text-center">
                                                             <div class="d-flex justify-content-center align-items-center container">
                                                                 <div class="row">
-                                                                    <form th:method="PATCH"
-                                                                          th:action="@{/admin/{id}/edit/ (id=${person.getId()})}"
+                                                                    <form th:method="POST"
+                                                                          th:action="@{/admin/edit/ (id=${person.getId()})}"
                                                                           th:object="${person}">
 
                                                                         <div class="mb-3">
-                                                                            <label for="edit-id"><b>ID</b></label>
-                                                                            <input class="form-control" type="text"
+                                                                            <input class="form-control" type="hidden"
                                                                                    id="edit-id"
                                                                                    th:value="*{id}"
-                                                                                   th:name="id" disabled>
+                                                                                   th:name="id" >
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="edit-izd"><b>ID</b></label>
+                                                                            <input class="form-control" type="text"
+                                                                                   id="edit-izd"
+                                                                                   th:value="*{id}"
+                                                                                   th:name="izd" disabled>
                                                                         </div>
 
                                                                         <div class="mb-3">
@@ -205,16 +212,23 @@
                                                         <div class="modal-body text-center">
                                                             <div class="d-flex justify-content-center align-items-center container">
                                                                 <div class="row">
-                                                                    <form th:method="DELETE"
-                                                                          th:action="@{admin/{id}/ (id=${person.getId()})}"
+                                                                    <form th:method="GET"
+                                                                          th:action="@{/admin/delete (id=${person.getId()})}"
                                                                           th:object="${person}">
 
                                                                         <div class="mb-3">
-                                                                            <label for="delete-id"><b>ID</b></label>
-                                                                            <input class="form-control" type="text"
+                                                                            <input class="form-control" type="hidden"
                                                                                    id="delete-id"
-                                                                                   th:value="*{id}"
-                                                                                   th:name="id" disabled>
+                                                                                   th:value="${person.getId()}"
+                                                                                   th:name="id" >
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="delete-izd"><b>ID</b></label>
+                                                                            <input class="form-control" type="text"
+                                                                                   id="delete-izd"
+                                                                                   th:value="${person.getId()}"
+                                                                                   th:name="izd" disabled>
                                                                         </div>
 
                                                                         <div class="mb-3">

@@ -8,6 +8,7 @@ import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 
@@ -36,15 +37,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void update(User user) {
-        if (!user.getPassword().equals(show(user.getId()).getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userRepository.save(user);
-    }
-    @Override
-    @Transactional
-    public void updateUserById(int id, User updateUser) {
+    public void updateUserById(Long id, User updateUser) {
         updateUser.setId(id);
         updateUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
         userRepository.save(updateUser);
@@ -53,19 +46,17 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void delete(Long id) {
-        if (userRepository.findById(id).isPresent()) {
+        userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Entity with id " + id + " not found"));
             userRepository.deleteById(id);
-        }
+
     }
 
     @Override
     public List<User> getAllUser() {
+
         return userRepository.findAll();
     }
 
-    @Override
-    public User show(Long id) {
-        User user = userRepository.findById(id).get();
-        return user;
-    }
+
 }
