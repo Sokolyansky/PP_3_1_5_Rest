@@ -39,7 +39,7 @@ public class Init {
         userService.add(user);
 
         User user1 = new User();
-        user1.setFirstName("admin");
+        user1.setFirstName("admin1");
         user1.setLastName("admin");
         user1.setAge(30L);
         user1.setPassword("admin");

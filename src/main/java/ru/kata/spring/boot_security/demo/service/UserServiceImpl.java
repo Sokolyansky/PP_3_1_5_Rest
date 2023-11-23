@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
+    @Override
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);
     }
@@ -39,7 +39,10 @@ public class UserServiceImpl implements UserService{
     @Transactional
     public void updateUserById(Long id, User updateUser) {
         updateUser.setId(id);
-        updateUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
+        if(!updateUser.getPassword().equals(userRepository.findById(id).get().getPassword())) {
+            updateUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
+        }
+        userRepository.deleteById(id);
         userRepository.save(updateUser);
     }
 

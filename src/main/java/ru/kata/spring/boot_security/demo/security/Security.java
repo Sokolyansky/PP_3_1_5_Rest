@@ -30,11 +30,7 @@ public class Security implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User `%s` not found", name));
         }
-        return new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(), mapRolesToAuthority(user.getRoles()));
-    }
-
-    private Collection<? extends GrantedAuthority> mapRolesToAuthority(Collection<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
+        return user;
     }
 
 }

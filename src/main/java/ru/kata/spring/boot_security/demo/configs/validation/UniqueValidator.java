@@ -2,12 +2,13 @@ package ru.kata.spring.boot_security.demo.configs.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UniqueValidator implements ConstraintValidator<Unique, String> {
+public class UniqueValidator implements ConstraintValidator<Unique, User> {
 
     @Autowired
     private UserRepository userRepository;
@@ -17,9 +18,10 @@ public class UniqueValidator implements ConstraintValidator<Unique, String> {
     }
 
     @Override
-    public boolean isValid(String name, ConstraintValidatorContext context) {
+    public boolean isValid(User user, ConstraintValidatorContext context) {
         try {
-            return name != null && !userRepository.existsByFirstName(name);
+            return !userRepository.existsByFirstName(user.getFirstName()) &&
+                    (user.getId() == userRepository.findByUsername(user.getFirstName()).getId() || user.getId() == 0);
         }
         catch (Exception e){
             return true;

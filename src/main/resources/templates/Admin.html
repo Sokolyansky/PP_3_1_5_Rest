@@ -316,7 +316,6 @@
                                             <label for="new-username"><b>Firstname</b></label>
                                             <input class="form-control" type="text"
                                                    id="new-username"
-                                                   th:value="*{firstName}"
                                                    th:name="firstName"
                                                    required>
                                         </div>
@@ -325,7 +324,6 @@
                                             <label for="new-password"><b>Password</b></label>
                                             <input class="form-control" type="password" [(ngModel)]="password"
                                                    id="new-password"
-                                                   th:value="*{password}"
                                                    th:name="password"
                                                    required>
                                         </div>
@@ -334,7 +332,6 @@
                                             <label for="new-name"><b>LastName</b></label>
                                             <input class="form-control" type="text"
                                                    id="new-name"
-                                                   th:value="*{lastName}"
                                                    th:name="lastName"
                                                    required>
                                         </div>
@@ -343,7 +340,6 @@
                                             <label for="new-age"><b>Age</b></label>
                                             <input class="form-control" type="text"
                                                    id="new-age"
-                                                   th:value="*{age}"
                                                    th:name="age"
                                                    required>
                                         </div>
@@ -354,7 +350,6 @@
                                                     aria-label="Default select example"
                                                     id="new-roles"
                                                     th:name="roles"
-                                                    th:value="*{roles}"
                                                     required>
                                                 <option th:each="role : ${allRoles}"
                                                         th:value="${role.getId()}"
