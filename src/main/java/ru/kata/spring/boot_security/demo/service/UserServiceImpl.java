@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -59,6 +60,12 @@ public class UserServiceImpl implements UserService{
     public List<User> getAllUser() {
 
         return userRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public User findById(Long id) {
+        Optional<User> userById = userRepository.findById(id);
+        return userById.orElse(null);
     }
 
 

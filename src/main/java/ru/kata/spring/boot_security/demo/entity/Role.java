@@ -23,8 +23,8 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+   /* @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;*/
 
     public Role() {
     }
@@ -33,9 +33,9 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    public Collection<User> getUsers() {
+    /*public Collection<User> getUsers() {
         return users;
-    }
+    }*/
 
     public String getName() {
         return name;
@@ -53,19 +53,19 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
         return Objects.equals(id, role.id) && Objects.equals(name, role.name) && Objects.equals(users, role.users);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public int hashCode() {
         return Objects.hash(id, name, users);
     }
-
+*/
     @Override
     public String toString() {
         return name;
